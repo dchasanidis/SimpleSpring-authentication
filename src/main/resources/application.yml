@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    password: mysecretpassword
+  jpa:
+    hibernate:
+      ddl-auto: update
+jwt:
+  secret: 9d6135d8adefc8b20329f6525dbb20444b151f32b61da22ebbab71913e19e32e
+  expiration: '86400000'

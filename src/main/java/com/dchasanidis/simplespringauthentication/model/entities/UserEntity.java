@@ -121,7 +121,7 @@ public class UserEntity implements UserDetails {
         return new UserEntity()
                 .setUsername(registrationForm.username())
                 .setEmail(registrationForm.email())
-                .setAuthorities(Set.of(Authority.ROLE_USER))
+                .setAuthorities(Set.of(Authority.USER))
                 ;
     }
 }

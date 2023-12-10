@@ -3,8 +3,8 @@ package com.dchasanidis.simplespringauthentication.model.enums;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Authority implements GrantedAuthority {
-    ROLE_USER(1),
-    ROLE_ADMIN(2),
+    USER(1),
+    ADMIN(2),
     ;
 
     private final int ordinalValue;
@@ -19,6 +19,6 @@ public enum Authority implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return name();
+        return "ROLE_" + name();
     }
 }

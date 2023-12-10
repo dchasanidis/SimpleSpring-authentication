@@ -6,7 +6,8 @@ This project, is a super simple implementation of an authentication and authoriz
 
 
 Future goals: 
-* Tests, tests, tests… 
+* Tests, tests, tests…
+* Application exceptions and not generic runtime exceptions
 * Finish/cleanup REST API
 * Kafka or RabbitMQ or gRPC (some kind of message broker)
 * OpenAPI integration for better management of endpoints

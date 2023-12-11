@@ -5,6 +5,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -32,23 +33,22 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain) throws ServletException, IOException {
         // Check if the request matches an endpoint that is permitted all
-        if (openEndpoints.stream().anyMatch(it -> it.matches(request))) {
+        if (openEndpoints.stream().anyMatch(matcher -> matcher.matches(request))) {
             // Skip further processing and pass the request to the next filter in the chain
             filterChain.doFilter(request, response);
             return;
         }
 
         final String authorizationHeader = request.getHeader(AUTHORIZATION_HEADER);
-        final String token = extractTokenFromHeader(authorizationHeader);
-        SecurityContext securityContext = tokenDecoderService.getContextFromToken(token);
-        SecurityContextHolder.setContext(securityContext);
-        filterChain.doFilter(request, response);
-    }
-
-    private static String extractTokenFromHeader(final String authorizationHeader) {
         if (authorizationHeader == null || !authorizationHeader.startsWith(BEARER)) {
-            throw new RuntimeException("Expected header should start with \"Bearer \"");
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        } else {
+            final String token = authorizationHeader.replace(BEARER, "");
+            SecurityContext securityContext = tokenDecoderService.getContextFromToken(token);
+            SecurityContextHolder.setContext(securityContext);
+            filterChain.doFilter(request, response);
         }
-        return authorizationHeader.replace(BEARER, "");
     }
 }

@@ -19,7 +19,7 @@ public class AuthController {
     private final TokenGeneratorService tokenGeneratorService;
 
 
-    public AuthController(UserDetailsService userDetailsService, final RegistrationService registrationService, final TokenGeneratorService tokenGeneratorService) {
+    public AuthController(final UserDetailsService userDetailsService, final RegistrationService registrationService, final TokenGeneratorService tokenGeneratorService) {
         this.userDetailsService = userDetailsService;
         this.registrationService = registrationService;
         this.tokenGeneratorService = tokenGeneratorService;

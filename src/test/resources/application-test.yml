@@ -7,7 +7,7 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.H2Dialect
   datasource:
-    url: jdbc:h2:mem:emwa;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:auth;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driverClassName: org.h2.Driver
     username: sa
     password: sa

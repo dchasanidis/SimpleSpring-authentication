@@ -1,5 +1,6 @@
 package com.dchasanidis.simplespringauthentication.services;
 
+import com.dchasanidis.simplespringauthentication.model.IssueCodes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.jackson.io.JacksonSerializer;
@@ -24,12 +25,14 @@ public class TokenGeneratorService {
 
     @Value("${jwt.expiration}")
     private int jwtExpirationMs;
+    private final ApplicationExceptionFactory exceptionFactory;
 
 
-    public TokenGeneratorService(final ObjectMapper objectMapper, final PasswordEncoder passwordEncoder, SecretKeySpec secretKey) {
+    public TokenGeneratorService(final ObjectMapper objectMapper, final PasswordEncoder passwordEncoder, SecretKeySpec secretKey, ApplicationExceptionFactory exceptionFactory) {
         this.objectMapper = objectMapper;
         this.passwordEncoder = passwordEncoder;
         this.secretKey = secretKey;
+        this.exceptionFactory = exceptionFactory;
     }
 
     public Map<String, String> createToken(final UserDetails userDetails, final String password) {
@@ -40,9 +43,10 @@ public class TokenGeneratorService {
             return response;
         } else {
             // Handle authentication failure
-            throw new RuntimeException("Authentication failed");
+            throw exceptionFactory.createApplicationException(IssueCodes.AUTHENTICATION_FAILED);
         }
     }
+
     private String generateToken(final UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("sub", userDetails.getUsername());

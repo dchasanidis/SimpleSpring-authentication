@@ -6,10 +6,3 @@ public record ProblemRequest(
 ) {
 
 }
-//    ProblemRequest:
-//      type: object
-//      properties:
-//        url:
-//          type: string
-//        method:
-//          type: string

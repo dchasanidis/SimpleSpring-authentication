@@ -1,5 +1,6 @@
 package com.dchasanidis.simplespringauthentication.api;
 
+import com.dchasanidis.simplespringauthentication.model.dtos.requests.LoginForm;
 import com.dchasanidis.simplespringauthentication.model.dtos.requests.RegistrationForm;
 import com.dchasanidis.simplespringauthentication.model.entities.UserEntity;
 import com.dchasanidis.simplespringauthentication.services.RegistrationService;
@@ -26,9 +27,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Map<String, String> login(@RequestBody Map<String, String> loginRequest) {
-        final String username = loginRequest.get("username");
-        final String password = loginRequest.get("password");
+    public Map<String, String> login(@RequestBody LoginForm loginForm) {
+        final String username = loginForm.username();
+        final String password = loginForm.password();
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         return tokenGeneratorService.createToken(userDetails, password);

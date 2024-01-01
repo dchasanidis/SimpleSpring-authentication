@@ -16,5 +16,8 @@ public interface IssueCodes {
         }
     };
 
+    IssueCode USERNAME_OR_EMAIL_EXISTS = () -> "Username or email already exists";
+
     IssueCode INTERNAL_APPLICATION_ERROR = () -> "Uncaught exception resulting in internal application error";
+
 }

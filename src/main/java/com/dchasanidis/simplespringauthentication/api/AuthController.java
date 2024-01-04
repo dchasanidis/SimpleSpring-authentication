@@ -2,7 +2,7 @@ package com.dchasanidis.simplespringauthentication.api;
 
 import com.dchasanidis.simplespringauthentication.model.dtos.requests.LoginForm;
 import com.dchasanidis.simplespringauthentication.model.dtos.requests.RegistrationForm;
-import com.dchasanidis.simplespringauthentication.model.entities.UserEntity;
+import com.dchasanidis.simplespringauthentication.model.dtos.responses.UserDto;
 import com.dchasanidis.simplespringauthentication.services.RegistrationService;
 import com.dchasanidis.simplespringauthentication.services.TokenGeneratorService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,7 +36,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public UserEntity register(@RequestBody RegistrationForm registrationForm) {
+    public UserDto register(@RequestBody RegistrationForm registrationForm) {
         return registrationService.register(registrationForm);
     }
 

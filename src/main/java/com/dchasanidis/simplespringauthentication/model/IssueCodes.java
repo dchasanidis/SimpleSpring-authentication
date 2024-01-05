@@ -16,8 +16,22 @@ public interface IssueCodes {
         }
     };
 
-    IssueCode USERNAME_OR_EMAIL_EXISTS = () -> "Username or email already exists";
+    IssueCode USERNAME_OR_EMAIL_EXISTS = new IssueCode() {
+        @Override
+        public String getMessage() {
+            return "Username or email already exists";
+        }
 
-    IssueCode INTERNAL_APPLICATION_ERROR = () -> "Uncaught exception resulting in internal application error";
+        @Override
+        public HttpStatus getResponseStatus() {
+            return HttpStatus.BAD_REQUEST;
+        }
+    };
 
+    IssueCode INTERNAL_APPLICATION_ERROR = new IssueCode() {
+        @Override
+        public String getMessage() {
+            return "Uncaught exception resulting in internal application error";
+        }
+    };
 }

@@ -11,3 +11,4 @@ Future goals:
 * Finish/cleanup REST API
 * Kafka or RabbitMQ or gRPC (some kind of message broker)
 * OpenAPI integration for better management of endpoints
+* Add more documentation/usage etc

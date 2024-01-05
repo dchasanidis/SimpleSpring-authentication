@@ -1,12 +1,10 @@
 package com.dchasanidis.simplespringauthentication.model.entities;
 
-import com.dchasanidis.simplespringauthentication.model.enums.Authority;
 import com.dchasanidis.simplespringauthentication.model.dtos.requests.RegistrationForm;
+import com.dchasanidis.simplespringauthentication.model.enums.Authority;
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.Set;
 
 @Entity(name = "users")
@@ -40,7 +38,7 @@ public class UserEntity implements UserDetails {
 
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Set<Authority> getAuthorities() {
         return this.authorities;
     }
 

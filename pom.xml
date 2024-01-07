@@ -205,6 +205,12 @@
                             <supportingFilesToGenerate>
                                 ApiUtil.java
                             </supportingFilesToGenerate>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>eMappings>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
                             <configOptions>
                                 <delegatePattern>true</delegatePattern>
                             </configOptions>
@@ -214,5 +220,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

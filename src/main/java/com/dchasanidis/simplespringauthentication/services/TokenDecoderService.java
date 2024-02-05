@@ -2,9 +2,9 @@ package com.dchasanidis.simplespringauthentication.services;
 
 import com.dchasanidis.simplespringauthentication.model.entities.UserEntity;
 import com.dchasanidis.simplespringauthentication.repositories.UserRepository;
-import io.jsonwebtoken.Jwt;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextImpl;
@@ -24,14 +24,14 @@ public class TokenDecoderService {
 
 
     public SecurityContext getContextFromToken(final String token) {
-        final DefaultClaims defaultClaims = validateTokenWithoutSignature(token);
-        final UserEntity user = userRepository.findByUsername(defaultClaims.getSubject()).orElseThrow();
+        final Claims claims = validateSignedToken(token);
+        final UserEntity user = userRepository.findByUsername(claims.getSubject()).orElseThrow();
         final UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
         return new SecurityContextImpl(authenticationToken);
     }
 
-    private DefaultClaims validateTokenWithoutSignature(final String token) {
-        final Jwt<?, DefaultClaims> parsed = (Jwt<?, DefaultClaims>) parser.parse(token);
-        return parsed.getPayload();
+    private Claims validateSignedToken(final String token) {
+        final Jws<Claims> claimsJws = parser.parseSignedClaims(token);
+        return claimsJws.getPayload();
     }
 }

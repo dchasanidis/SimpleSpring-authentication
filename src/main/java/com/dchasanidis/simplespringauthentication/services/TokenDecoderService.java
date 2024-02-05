@@ -27,13 +27,13 @@ public class TokenDecoderService {
 
 
     public SecurityContext getContextFromToken(final String token) {
-        final Claims claims = validateSignedToken(token);
+        final Claims claims = validateSignedTokenAndExtractClaims(token);
         final UserEntity user = userRepository.findByUsername(claims.getSubject()).orElseThrow();
         final UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
         return new SecurityContextImpl(authenticationToken);
     }
 
-    private Claims validateSignedToken(final String token) {
+    private Claims validateSignedTokenAndExtractClaims(final String token) {
         try {
             final Jws<Claims> claimsJws = parser.parseSignedClaims(token);
             return claimsJws.getPayload();

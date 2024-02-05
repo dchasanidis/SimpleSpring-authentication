@@ -1,5 +1,6 @@
 package com.dchasanidis.simplespringauthentication.services;
 
+import com.dchasanidis.simplespringauthentication.errorHandling.IssueCodes;
 import com.dchasanidis.simplespringauthentication.model.entities.UserEntity;
 import com.dchasanidis.simplespringauthentication.repositories.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -14,12 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 public class TokenDecoderService {
-
     private final UserRepository userRepository;
     private final JwtParser parser;
-    public TokenDecoderService(final UserRepository userRepository, JwtParser parser) {
+    private final ApplicationExceptionFactory exceptionFactory;
+
+    public TokenDecoderService(final UserRepository userRepository, JwtParser parser, ApplicationExceptionFactory exceptionFactory) {
         this.userRepository = userRepository;
         this.parser = parser;
+        this.exceptionFactory = exceptionFactory;
     }
 
 
@@ -31,7 +34,11 @@ public class TokenDecoderService {
     }
 
     private Claims validateSignedToken(final String token) {
-        final Jws<Claims> claimsJws = parser.parseSignedClaims(token);
-        return claimsJws.getPayload();
+        try {
+            final Jws<Claims> claimsJws = parser.parseSignedClaims(token);
+            return claimsJws.getPayload();
+        } catch (RuntimeException e) {
+            throw exceptionFactory.createApplicationException(IssueCodes.AUTHENTICATION_FAILED);
+        }
     }
 }

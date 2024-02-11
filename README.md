@@ -7,7 +7,7 @@ This project, is a super simple implementation of an authentication and authoriz
 
 Future goals: 
 * Tests, tests, tests…
-* Application exceptions and not generic runtime exceptions
+* ~~Application exceptions and not generic runtime exceptions~~ ✓
 * Finish/cleanup REST API
 * Kafka integration for messaging
 * ~~OpenAPI integration for better management of endpoints~~ ✓

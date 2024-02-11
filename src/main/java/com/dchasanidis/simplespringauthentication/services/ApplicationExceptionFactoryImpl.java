@@ -1,6 +1,6 @@
 package com.dchasanidis.simplespringauthentication.services;
 
-import com.dchasanidis.simplespringauthentication.api.GlobalExceptionHandler;
+import com.dchasanidis.simplespringauthentication.errorHandling.GlobalExceptionHandler;
 import com.dchasanidis.simplespringauthentication.model.ApplicationException;
 import com.dchasanidis.simplespringauthentication.model.IssueCode;
 import org.slf4j.Logger;
@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.UUID;
 
-import static com.dchasanidis.simplespringauthentication.model.IssueCodes.INTERNAL_APPLICATION_ERROR;
+import static com.dchasanidis.simplespringauthentication.errorHandling.IssueCodes.INTERNAL_APPLICATION_ERROR;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Component

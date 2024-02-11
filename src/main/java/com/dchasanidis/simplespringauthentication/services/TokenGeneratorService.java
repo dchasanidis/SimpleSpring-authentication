@@ -1,6 +1,7 @@
 package com.dchasanidis.simplespringauthentication.services;
 
-import com.dchasanidis.simplespringauthentication.model.IssueCodes;
+import com.dchasanidis.simplespringauthentication.errorHandling.IssueCodes;
+import com.dchasanidis.simplespringauthentication.model.LoginResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.jackson.io.JacksonSerializer;
@@ -35,11 +36,11 @@ public class TokenGeneratorService {
         this.exceptionFactory = exceptionFactory;
     }
 
-    public Map<String, String> createToken(final UserDetails userDetails, final String password) {
+    public LoginResponse createToken(final UserDetails userDetails, final String password) {
         if (userDetails != null && passwordEncoder.matches(password, userDetails.getPassword())) {
             String token = generateToken(userDetails);
-            Map<String, String> response = new HashMap<>();
-            response.put("token", token);
+            LoginResponse response = new LoginResponse();
+            response.setToken(token);
             return response;
         } else {
             // Handle authentication failure

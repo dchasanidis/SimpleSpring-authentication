@@ -1,8 +1,8 @@
 package com.dchasanidis.simplespringauthentication.services;
 
-import com.dchasanidis.simplespringauthentication.model.IssueCodes;
-import com.dchasanidis.simplespringauthentication.model.dtos.requests.RegistrationForm;
-import com.dchasanidis.simplespringauthentication.model.dtos.responses.UserDto;
+import com.dchasanidis.simplespringauthentication.errorHandling.IssueCodes;
+import com.dchasanidis.simplespringauthentication.model.RegistrationForm;
+import com.dchasanidis.simplespringauthentication.model.User;
 import com.dchasanidis.simplespringauthentication.model.dtos.responses.UserMapper;
 import com.dchasanidis.simplespringauthentication.model.entities.UserEntity;
 import com.dchasanidis.simplespringauthentication.repositories.UserRepository;
@@ -25,12 +25,13 @@ public class RegistrationService {
     }
 
     @Transactional
-    public UserDto register(final RegistrationForm registrationForm) {
-        if (userRepository.existsByEmailOrUsername(registrationForm.email(), registrationForm.username())) {
+    public User register(final RegistrationForm registrationForm) {
+        if (userRepository.existsByEmailOrUsername(registrationForm.getEmail(), registrationForm.getUsername())) {
             throw exceptionFactory.createApplicationException(IssueCodes.USERNAME_OR_EMAIL_EXISTS);
         }
-        return userMapper.toDto(userRepository.save(UserEntity.fromRegistrationForm(registrationForm)
-                .setPassword(passwordEncoder.encode(registrationForm.password())))
-        );
+
+        final UserEntity newUser = UserEntity.fromRegistrationForm(registrationForm);
+        newUser.setPassword(passwordEncoder.encode(registrationForm.getPassword()));
+        return userMapper.toDto(userRepository.save(newUser));
     }
 }

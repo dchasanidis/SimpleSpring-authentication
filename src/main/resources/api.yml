@@ -1,0 +1,132 @@
+openapi: 3.0.0
+info:
+  title: Simple Spring JWT auth API
+  description: An example API for managing books
+  version: 1.0.0
+
+paths:
+  /login:
+    post:
+      operationId: login
+      summary: Login endpoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginForm'
+      responses:
+        '200':
+          description: blah
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+
+  /register:
+    post:
+      operationId: register
+      summary: registration endpoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationForm'
+      responses:
+        '200':
+          description: blah
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+
+  /admin/stuff:
+    get:
+      operationId: getAdminStuff
+      summary: An example of an admin-protected endpoint
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminStuff'
+  /user/stuff:
+    get:
+      operationId: getUserStuff
+      summary: An example of a user-protected endpoint
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: string
+
+components:
+  schemas:
+    AuthorityDtoEnum:
+      type: string
+      enum:
+        - USER
+        - ADMIN
+    LoginForm:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    RegistrationForm:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    AdminStuff:
+      type: object
+      properties:
+        item:
+          type: string
+    ProblemRequest:
+      type: object
+      properties:
+        url:
+          type: string
+        method:
+          type: string
+    Problem:
+      type: object
+      properties:
+        id:
+          type: string
+        identifier:
+          type: string
+        status:
+          type: integer
+        timestamp:
+          type: string
+          format: date-time
+        message:
+          type: string
+        problemRequest:
+          $ref: '#/components/schemas/ProblemRequest'
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorityDtoEnum'

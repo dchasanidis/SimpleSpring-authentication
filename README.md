@@ -9,6 +9,6 @@ Future goals:
 * Tests, tests, tests…
 * Application exceptions and not generic runtime exceptions
 * Finish/cleanup REST API
-* Kafka or RabbitMQ or gRPC (some kind of message broker)
+* Kafka integration for messaging
 * OpenAPI integration for better management of endpoints
 * Add more documentation/usage etc

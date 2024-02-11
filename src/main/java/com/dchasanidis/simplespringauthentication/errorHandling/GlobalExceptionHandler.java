@@ -1,8 +1,8 @@
-package com.dchasanidis.simplespringauthentication.api;
+package com.dchasanidis.simplespringauthentication.errorHandling;
 
 import com.dchasanidis.simplespringauthentication.model.ApplicationException;
-import com.dchasanidis.simplespringauthentication.model.dtos.responses.Problem;
-import com.dchasanidis.simplespringauthentication.model.dtos.responses.ProblemRequest;
+import com.dchasanidis.simplespringauthentication.model.Problem;
+import com.dchasanidis.simplespringauthentication.model.ProblemRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.springframework.http.HttpHeaders;
@@ -62,13 +62,17 @@ public class GlobalExceptionHandler {
     }
 
     private static Problem createErrorBody(final UUID id, final String key, final HttpStatus status, final Exception exception, final HttpServletRequest request) {
-        return new Problem(id.toString(),
-                key,
-                status.value(),
-                LocalDateTime.now(),
-                exception.getMessage(),
-                new ProblemRequest(request.getRequestURI(), request.getMethod())
-        );
+        return new Problem()
+                .id(id.toString())
+                .identifier(key)
+                .status(status.value())
+                .timestamp(LocalDateTime.now())
+                .message(exception.getMessage())
+                .problemRequest(
+                        new ProblemRequest()
+                                .url(request.getRequestURI())
+                                .method(request.getMethod())
+                );
     }
 }
 

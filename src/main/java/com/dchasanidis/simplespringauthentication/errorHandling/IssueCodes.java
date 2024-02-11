@@ -1,5 +1,6 @@
-package com.dchasanidis.simplespringauthentication.model;
+package com.dchasanidis.simplespringauthentication.errorHandling;
 
+import com.dchasanidis.simplespringauthentication.model.IssueCode;
 import org.springframework.http.HttpStatus;
 
 public interface IssueCodes {

@@ -10,5 +10,5 @@ Future goals:
 * Application exceptions and not generic runtime exceptions
 * Finish/cleanup REST API
 * Kafka integration for messaging
-* OpenAPI integration for better management of endpoints
+* ~~OpenAPI integration for better management of endpoints~~ ✓
 * Add more documentation/usage etc

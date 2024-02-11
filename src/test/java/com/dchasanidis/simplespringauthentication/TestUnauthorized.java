@@ -1,6 +1,6 @@
 package com.dchasanidis.simplespringauthentication;
 
-import com.dchasanidis.simplespringauthentication.model.dtos.responses.Problem;
+import com.dchasanidis.simplespringauthentication.model.Problem;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

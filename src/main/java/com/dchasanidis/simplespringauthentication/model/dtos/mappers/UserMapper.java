@@ -1,4 +1,4 @@
-package com.dchasanidis.simplespringauthentication.model.dtos.responses;
+package com.dchasanidis.simplespringauthentication.model.dtos.mappers;
 
 import com.dchasanidis.simplespringauthentication.model.User;
 import com.dchasanidis.simplespringauthentication.model.entities.UserEntity;

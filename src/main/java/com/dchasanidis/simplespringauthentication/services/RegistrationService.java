@@ -3,7 +3,7 @@ package com.dchasanidis.simplespringauthentication.services;
 import com.dchasanidis.simplespringauthentication.errorHandling.IssueCodes;
 import com.dchasanidis.simplespringauthentication.model.RegistrationForm;
 import com.dchasanidis.simplespringauthentication.model.User;
-import com.dchasanidis.simplespringauthentication.model.dtos.responses.UserMapper;
+import com.dchasanidis.simplespringauthentication.model.dtos.mappers.UserMapper;
 import com.dchasanidis.simplespringauthentication.model.entities.UserEntity;
 import com.dchasanidis.simplespringauthentication.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;

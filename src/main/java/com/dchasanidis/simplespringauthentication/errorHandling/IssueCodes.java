@@ -29,10 +29,5 @@ public interface IssueCodes {
         }
     };
 
-    IssueCode INTERNAL_APPLICATION_ERROR = new IssueCode() {
-        @Override
-        public String getMessage() {
-            return "Uncaught exception resulting in internal application error";
-        }
-    };
+    IssueCode INTERNAL_APPLICATION_ERROR = () -> "Uncaught exception resulting in internal application error";
 }

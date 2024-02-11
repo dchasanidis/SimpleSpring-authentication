@@ -1,6 +1,6 @@
 package com.dchasanidis.simplespringauthentication.model.entities;
 
-import com.dchasanidis.simplespringauthentication.model.dtos.requests.RegistrationForm;
+import com.dchasanidis.simplespringauthentication.model.RegistrationForm;
 import com.dchasanidis.simplespringauthentication.model.enums.Authority;
 import jakarta.persistence.*;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -115,10 +115,10 @@ public class UserEntity implements UserDetails {
         return this;
     }
 
-    public static UserEntity fromRegistrationForm(RegistrationForm registrationForm) {
+    public static UserEntity fromRegistrationForm(final RegistrationForm registrationForm) {
         return new UserEntity()
-                .setUsername(registrationForm.username())
-                .setEmail(registrationForm.email())
+                .setUsername(registrationForm.getUsername())
+                .setEmail(registrationForm.getEmail())
                 .setAuthorities(Set.of(Authority.USER))
                 ;
     }

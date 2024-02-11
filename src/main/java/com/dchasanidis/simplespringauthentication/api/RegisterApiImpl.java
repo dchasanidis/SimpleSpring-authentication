@@ -11,7 +11,7 @@ public class RegisterApiImpl implements RegisterApiDelegate {
 
     private final RegistrationService registrationService;
 
-    public RegisterApiImpl(RegistrationService registrationService) {
+    public RegisterApiImpl(final RegistrationService registrationService) {
         this.registrationService = registrationService;
     }
 

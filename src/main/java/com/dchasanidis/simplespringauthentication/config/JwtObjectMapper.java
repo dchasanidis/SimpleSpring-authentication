@@ -24,7 +24,7 @@ public class JwtObjectMapper {
 
     @Bean("jwtMapper")
     public ObjectMapper jwtMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
+        final ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         return objectMapper;
     }
